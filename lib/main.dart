@@ -5,6 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final items = List<String>.generate(10000, (i) => "Item $i");
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -54,33 +56,82 @@ class MyApp extends StatelessWidget {
                         image: AssetImage('assets/images/weko.png'),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        const Text(
-                          'WEKOのYoutube',
-                        ),
-                        FlatButton(
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.video_call,
-                                color: Colors.red,
-                              ),
-                              Text('登録する'),
-                            ],
+                        Container(
+                          child: Text(
+                            'WEKOのYoutube',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
-                          onPressed: () {
-                            // なにかアクションを書く
-                          },
+                        ),
+                        Container(
+                          child: FlatButton(
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.video_call,
+                                  color: Colors.red,
+                                ),
+                                Text('登録する'),
+                              ],
+                            ),
+                            onPressed: () {
+                              // なにかアクションを書く
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-              )
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      contentPadding: EdgeInsets.all(10),
+                      leading: Image(
+                        image: AssetImage('assets/images/sample.jpg'),
+                      ),
+                      title: Column(
+                        children: <Widget>[
+                          Text(
+                            'サンプルサンプルサンプルサンプルサンプル',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                '${index}回再生',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                ),
+                              ),
+                              Text(
+                                '${index}日前',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      trailing: Icon(Icons.more_vert),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
