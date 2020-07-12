@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtubeclone/single_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -97,6 +98,15 @@ class MyApp extends StatelessWidget {
                   itemCount: items.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      onTap: () async {
+                        //画面遷移
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SinglePage(),
+                          ),
+                        );
+                      },
                       contentPadding: EdgeInsets.all(10),
                       leading: Image(
                         image: AssetImage('assets/images/sample.jpg'),
